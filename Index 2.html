@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold Wave Digital - Marketing Health Check</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gold-btn {
+            background-color: #E6B654;
+            color: #171B33;
+        }
+        .gold-btn:hover {
+            background-color: #D4A343;
+        }
+        .brand-dark {
+            background-color: #171B33;
+        }
+        .brand-card-bg {
+            background-color: #202542;
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- 顶部导航栏：保持不变 -->
+    <header class="brand-dark py-6 px-8 flex justify-between items-center w-full shadow-md">
+        <div class="max-w-4xl mx-auto w-full flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="GWD-logo-semi-rev.webp" alt="Gold Wave Digital Logo" class="h-14 w-auto object-contain">
+            </div>
+            <div class="text-xs text-slate-300 space-x-6 hidden sm:block">
+                <span class="hover:text-white cursor-pointer">Home</span>
+                <span class="hover:text-white cursor-pointer">Services</span>
+                <span class="hover:text-white cursor-pointer">Contact</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主体容器：统一控制宽度与左对齐，缩小上下间距 -->
+    <main class="max-w-xl mx-auto px-4 py-6 w-full flex-grow">
+        
+        <!-- 标题区域：白色背景、深蓝色字、与下方问题框宽度和左侧完美对齐 -->
+        <div class="mb-5 text-left">
+            <h1 class="text-2xl font-extrabold text-[#171B33] mb-1.5 tracking-tight">Marketing Health Diagnostic</h1>
+            <p class="text-slate-600 text-xs leading-relaxed">Enter your business metrics below to generate an instant diagnostic report.</p>
+        </div>
+
+        <!-- 评估表单卡片：只保留问题 -->
+        <div id="assessment-card" class="brand-dark border border-slate-700/60 rounded-2xl shadow-2xl p-6 sm:p-8 text-slate-100">
+            <form id="health-form" class="space-y-6">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-200 uppercase tracking-wider mb-2">1. Monthly Website Visitors</label>
+                    <select id="traffic" class="w-full brand-card-bg border border-slate-600 rounded-xl p-3 text-sm text-slate-100 focus:ring-2 focus:ring-[#E6B654] focus:outline-none">
+                        <option value="10">Less than 1,000</option>
+                        <option value="20">1,000 - 10,000</option>
+                        <option value="30">More than 10,000</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-200 uppercase tracking-wider mb-2">2. Local Digital Presence & Funnel Setup</label>
+                    <select id="conversion" class="w-full brand-card-bg border border-slate-600 rounded-xl p-3 text-sm text-slate-100 focus:ring-2 focus:ring-[#E6B654] focus:outline-none">
+                        <option value="5">Basic social media only / No active lead capture</option>
+                        <option value="15">Standard website with basic contact form</option>
+                        <option value="25">Optimized local SEO & interactive conversion funnel</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-200 uppercase tracking-wider mb-2">3. Social Media & B2B Content Frequency</label>
+                    <select id="content" class="w-full brand-card-bg border border-slate-600 rounded-xl p-3 text-sm text-slate-100 focus:ring-2 focus:ring-[#E6B654] focus:outline-none">
+                        <option value="5">Rarely updated</option>
+                        <option value="15">Monthly updates</option>
+                        <option value="25">Consistent weekly updates</option>
+                    </select>
+                </div>
+
+                <button type="button" onclick="calculateScore()" class="w-full gold-btn font-bold py-3.5 rounded-full transition duration-200 shadow-md text-sm tracking-wide">
+                    Generate Report
+                </button>
+            </form>
+        </div>
+
+        <!-- 结果展示区域 -->
+        <div id="result-card" class="hidden brand-dark border border-slate-700/60 rounded-2xl shadow-2xl p-6 sm:p-8 text-slate-100">
+            <h2 class="text-xl font-bold mb-4 text-white text-center">Your Diagnostic Report</h2>
+            
+            <div class="brand-card-bg border border-[#E6B654]/30 rounded-xl p-5 mb-6 text-center">
+                <p class="text-xs text-slate-300 uppercase tracking-wider">Overall Health Score</p>
+                <p id="score-display" class="text-4xl font-extrabold text-[#E6B654] mt-2">0 / 80</p>
+            </div>
+
+            <div class="space-y-3 mb-6">
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-200">Key Recommendations:</h3>
+                <p id="feedback-text" class="text-xs text-slate-300 brand-card-bg p-4 rounded-xl border border-slate-700/60 leading-relaxed"></p>
+            </div>
+
+            <button type="button" onclick="resetForm()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium py-3 rounded-full transition duration-200 text-sm">
+                Run New Assessment
+            </button>
+        </div>
+
+    </main>
+
+    <!-- 底部版权 -->
+    <footer class="py-6 text-center text-slate-400 text-[10px] bg-slate-50 border-t border-slate-200">
+        <p>© 2026 Gold Wave Digital. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function calculateScore() {
+            const traffic = parseInt(document.getElementById('traffic').value);
+            const conversion = parseInt(document.getElementById('conversion').value);
+            const content = parseInt(document.getElementById('content').value);
+
+            const totalScore = traffic + conversion + content;
+
+            document.getElementById('score-display').innerText = totalScore + ' / 80';
+
+            let feedback = '';
+            if (totalScore >= 60) {
+                feedback = 'Your local digital footprint is strong. Focus on scaling paid acquisition and fine-tuning your conversion funnel.';
+            } else if (totalScore >= 35) {
+                feedback = 'Moderate performance. You have foundational elements in place, but local SEO and lead capture mechanisms need optimization.';
+            } else {
+                feedback = 'Critical gaps identified. Immediate action is required to establish a robust local digital presence and structured conversion funnel.';
+            }
+
+            document.getElementById('feedback-text').innerText = feedback;
+
+            document.getElementById('assessment-card').classList.add('hidden');
+            document.getElementById('result-card').classList.remove('hidden');
+        }
+
+        function resetForm() {
+            document.getElementById('health-form').reset();
+            document.getElementById('result-card').classList.add('hidden');
+            document.getElementById('assessment-card').classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>
